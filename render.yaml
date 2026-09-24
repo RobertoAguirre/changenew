@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
+#
+# Blueprint monorepo → Render + Supabase (externo).
+# En Render: New → Blueprint → conecta este repo de GitHub.
+#
+# La base de datos vive en Supabase; aquí solo se inyectan las variables
+# (Dashboard de Supabase → Project Settings → API / Database).
+
+services:
+  - type: web
+    name: sitio-web
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    rootDir: .
+    buildCommand: npm install -g bun && bun install --frozen-lockfile && bun run --filter @sitio/web build
+    startCommand: bun run --filter @sitio/web start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - apps/web/**
+        - packages/**
+        - package.json
+        - bun.lock
+        - render.yaml
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: NITRO_PRESET
+        value: render_com
+      # Públicas (también en el cliente vía VITE_*)
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      # Solo servidor — service_role de Supabase (nunca en el front)
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      # Opcional: connection string (Session mode / Transaction pooler)
+      - key: DATABASE_URL
+        sync: false

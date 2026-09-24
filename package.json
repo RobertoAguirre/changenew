@@ -1,0 +1,15 @@
+{
+  "name": "sitio-comercial",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "bun run --filter @sitio/web dev",
+    "build": "bun run --filter @sitio/web build",
+    "start": "bun run --filter @sitio/web start",
+    "lint": "bun run --filter @sitio/web lint",
+    "format": "bun run --filter @sitio/web format"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
