@@ -41,7 +41,7 @@ function Index() {
               height={36}
             />
             <span className="font-display text-lg font-extrabold tracking-tight">
-              SYNTAX<span className="text-accent">_</span>
+              ChangeAndCode
             </span>
           </a>
           <a
