@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun run --filter @sitio/web dev",
     "build": "bun run --filter @sitio/web build",
-    "start": "bun run --filter @sitio/web start",
+    "start": "node apps/web/.output/server/index.mjs",
     "lint": "bun run --filter @sitio/web lint",
     "format": "bun run --filter @sitio/web format"
   },

@@ -14,8 +14,8 @@ services:
     region: oregon
     branch: main
     rootDir: .
-    buildCommand: npm install -g bun && bun install --frozen-lockfile && bun run --filter @sitio/web build
-    startCommand: bun run --filter @sitio/web start
+    buildCommand: npm install -g bun && bun install --frozen-lockfile && NITRO_PRESET=render_com bun run --filter @sitio/web build
+    startCommand: node apps/web/.output/server/index.mjs
     healthCheckPath: /health
     autoDeployTrigger: commit
     buildFilter:
@@ -29,6 +29,8 @@ services:
       - key: NODE_VERSION
         value: "22"
       - key: HOST
+        value: "0.0.0.0"
+      - key: NITRO_HOST
         value: "0.0.0.0"
       - key: NITRO_PRESET
         value: render_com

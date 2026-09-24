@@ -40,4 +40,5 @@ gh repo create SitioComercial1 --private --source=. --remote=origin --push
 
 - Plan `free` en el Blueprint; súbelo en el dashboard si necesitas más recursos.
 - `NITRO_PRESET=render_com` hace que Nitro genere el servidor Node que Render ejecuta.
+- **Start Command** debe ser `node apps/web/.output/server/index.mjs` (no uses `bun run --filter … start`: sale con código 0 y Render marca “Application exited early”).
 - El `buildFilter` evita redespliegues si solo cambias docs u otros paths fuera de `apps/web` y `packages`.
